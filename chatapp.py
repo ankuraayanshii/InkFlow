@@ -46,11 +46,15 @@ def get_conversational_chain():
     return chain
 
 def user_input(user_question):
+    if 'chat_history' not in st.session_state:
+        st.session_state.chat_history = []
+    
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
     new_db = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
     docs = new_db.similarity_search(user_question)
     chain = get_conversational_chain()
     response = chain({"input_documents": docs, "question": user_question}, return_only_outputs=True)
+    st.session_state.chat_history.append({"question": user_question, "answer": response["output_text"]})
     st.write("Reply: ", response["output_text"])
 
 def main():
@@ -72,9 +76,14 @@ def main():
     if user_question:
         user_input(user_question)
 
+    if 'chat_history' in st.session_state:
+        for chat in st.session_state.chat_history:
+            st.text_area("Question", chat['question'], height=75)
+            st.text_area("Answer", chat['answer'], height=150)
+
     st.markdown("""
     <div style="background-color: #0E1117; color: white; padding: 10px; text-align: center; position: fixed; bottom: 0; width: 100%;">
-        Made with ❤️ by <a href="https://github.com/ankur" style="color: #FF4B4B; text-decoration: none;">Ankur</a>
+        Made with ❤️ by <a href="https://github.com/ankuraayanshii" style="color: #FF4B4B; text-decoration: none;">Ankur</a>
     </div>
     """, unsafe_allow_html=True)
 
