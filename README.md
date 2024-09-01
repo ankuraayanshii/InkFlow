@@ -51,7 +51,7 @@ GOOGLE_API_KEY=your_google_api_key_here
 Running the Application
 Execute the following command in the terminal:
 
-streamlit run app.py
+streamlit run chatapp.py
 
 Navigate to http://localhost:8501 in your web browser to view and interact with the application.
 
