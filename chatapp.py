@@ -74,7 +74,7 @@ def main():
 
     st.markdown("""
     <div style="background-color: #0E1117; color: white; padding: 10px; text-align: center; position: fixed; bottom: 0; width: 100%;">
-        Made with ❤️ by <a href="https://github.com/ankur" style="color: #FF4B4B; text-decoration: none;">Ankur</a>
+        Made with ❤️ by <a href="https://github.com/ankuraayanshii" style="color: #FF4B4B; text-decoration: none;">Ankur</a>
     </div>
     """, unsafe_allow_html=True)
 
